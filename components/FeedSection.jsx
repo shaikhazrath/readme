@@ -1,4 +1,3 @@
-'use client';
 import React, { useEffect, useRef, useState } from 'react';
 import { Bookmark, Heart, Share2, Volume2, VolumeX } from 'lucide-react';
 
