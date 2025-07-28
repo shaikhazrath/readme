@@ -1,8 +1,8 @@
+// app/page.tsx
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 import FeedSection   from './FeedSection';
-
-
+import  supabase  from '../utils/supabase'; 
 export default function Page() {
   const [feed, setFeed] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
@@ -13,47 +13,42 @@ export default function Page() {
   
   const ITEMS_PER_PAGE = 10;
 
-  const fetchRandomFeed = async (pageNum: number, append = false) => {
-    try {
-      if (append) {
-        setLoadingMore(true);
-      } else {
-        setLoading(true);
-        setError(null);
-      }
-
-      // Call the Edge Function
-      const response = await fetch(
-        `https://qorcpcblvjvmwmorxfol.supabase.co/functions/v1/dynamic-function?page=${pageNum}&limit=${ITEMS_PER_PAGE}`,
-        {
-          headers: {
-            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvcmNwY2Jsdmp2bXdtb3J4Zm9sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzMzcyOTcsImV4cCI6MjA2ODkxMzI5N30.YKU93ukOCEQa6oioYliUlLD3FiMrl2yoOnSSYJslYME',
-            'Authorization': `Bearer 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvcmNwY2Jsdmp2bXdtb3J4Zm9sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzMzcyOTcsImV4cCI6MjA2ODkxMzI5N30.YKU93ukOCEQa6oioYliUlLD3FiMrl2yoOnSSYJslYME`
-          }
-        }
-      );
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || 'Failed to fetch random feed');
-      }
-
-      if (append) {
-        setFeed(prev => [...prev, ...result.data]);
-      } else {
-        setFeed(result.data);
-      }
-
-      setHasMore(result.hasMore);
-    } catch (err) {
-      console.error('Error fetching random feed:', err);
-      setError(err instanceof Error ? err.message : 'An unknown error occurred');
-    } finally {
-      setLoading(false);
-      setLoadingMore(false);
+const fetchRandomFeed = async (pageNum: number, append = false) => {
+  try {
+    if (append) {
+      setLoadingMore(true);
+    } else {
+      setLoading(true);
+      setError(null);
     }
-  };
+
+    // Call the Edge Function using Supabase client
+    const { data, error } = await supabase.functions.invoke('dynamic-function', {
+      query: {
+        page: pageNum,
+        limit: ITEMS_PER_PAGE,
+      }
+    });
+
+    if (error) {
+      throw new Error(error.message || 'Failed to fetch random feed');
+    }
+
+    if (append) {
+      setFeed(prev => [...prev, ...data.data]);
+    } else {
+      setFeed(data.data);
+    }
+
+    setHasMore(data.hasMore);
+  } catch (err) {
+    console.error('Error fetching random feed:', err);
+    setError(err instanceof Error ? err.message : 'An unknown error occurred');
+  } finally {
+    setLoading(false);
+    setLoadingMore(false);
+  }
+};
 
   useEffect(() => {
     fetchRandomFeed(1);
