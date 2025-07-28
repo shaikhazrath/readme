@@ -24,10 +24,10 @@ const fetchRandomFeed = async (pageNum: number, append = false) => {
 
     // Call the Edge Function using Supabase client
   const { data, error } = await supabase.functions.invoke('dynamic-function', {
-      body: {
-        page: pageNum,
-        itemsPerPage: ITEMS_PER_PAGE,
-      },
+       body: JSON.stringify({
+    page: pageNum,
+    limit: ITEMS_PER_PAGE,
+  })
   });
     if (error) {
       throw new Error(error.message || 'Failed to fetch random feed');
