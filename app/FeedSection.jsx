@@ -67,32 +67,26 @@ const FeedSection = ({ data }) => {
           data-index={i}
           className="min-h-screen snap-start relative flex flex-col justify-between items-center px-6 py-12"
         >
-          {/* Header */}
           <header className="absolute top-8 text-center w-full">
             <p className="text-sm text-gray-400">
               <span className="text-indigo-400 font-semibold">{item.book}</span> <br /> {item.genre} • Pg {item.pageNumber}
             </p>
           </header>
 
-          {/* Quote */}
           <div className="flex-grow flex items-center justify-center">
             <blockquote className="text-xl md:text-3xl font-serif text-gray-100 max-w-3xl leading-relaxed text-center">
               “{item.snippet}”
             </blockquote>
           </div>
 
-          {/* Footer */}
           <div className="absolute bottom-6 w-full flex items-center justify-between px-4">
-            {/* Book Info */}
             <div className="text-left">
               <p className="text-xs text-gray-400">From:</p>
               <p className="text-sm font-semibold text-white">{item.book}</p>
               <button className="text-indigo-400 hover:underline text-xs mt-1">+ Save Book</button>
             </div>
 
-            {/* Buttons */}
             <div className="flex flex-col items-center space-y-4">
-                 {/* Speaker Button */}
               <button onClick={toggleSpeaker} className="transition hover:scale-110">
                 {isSpeakerOn ? (
                   <Volume2 className="w-7 h-7 text-blue-400" />
@@ -109,12 +103,8 @@ const FeedSection = ({ data }) => {
               <button className="transition hover:scale-110">
                 <Share2 className="w-7 h-7 text-gray-300" />
               </button>
-
-             
             </div>
           </div>
-
-          {/* Scroll Hint */}
           <div className="absolute bottom-2 w-full flex justify-center">
             <p className="text-xs text-gray-500 animate-pulse">⬆ Swipe for more wisdom</p>
           </div>

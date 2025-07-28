@@ -113,7 +113,7 @@ export default function Page() {
       )}
       
       {!hasMore && feed.length > 0 && (
-        <p className="text-gray-400 text-center py-8">You've reached the end</p>
+        <p className="text-gray-400 text-center py-8">You reached the end</p>
       )}
     </div>
   );
