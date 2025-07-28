@@ -24,7 +24,7 @@ export default function Page() {
 
       // Call the Edge Function
       const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SUPABASE_URL}/functions/v1/dynamic-function?page=${pageNum}&limit=${ITEMS_PER_PAGE}`,
+        `https://qorcpcblvjvmwmorxfol.supabase.co/functions/v1/dynamic-function?page=${pageNum}&limit=${ITEMS_PER_PAGE}`,
         {
           headers: {
             'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
