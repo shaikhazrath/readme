@@ -62,7 +62,7 @@ const FeedSection = ({ data }) => {
     <div className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scrollbar-hide bg-gradient-to-br from-black via-gray-900 to-gray-950">
       {data.map((item, i) => (
         <section
-          key={item.index}
+          key={item.id}
           ref={(el) => (sectionsRef.current[i] = el)}
           data-index={i}
           className="min-h-screen snap-start relative flex flex-col justify-between items-center px-6 py-12"

@@ -1,7 +1,5 @@
-// app/page.tsx
 'use client';
 import { useState, useEffect, useCallback } from 'react';
-import dynamic from 'next/dynamic';
 import FeedSection   from './FeedSection';
 
 
