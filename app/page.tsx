@@ -27,8 +27,8 @@ export default function Page() {
         `https://qorcpcblvjvmwmorxfol.supabase.co/functions/v1/dynamic-function?page=${pageNum}&limit=${ITEMS_PER_PAGE}`,
         {
           headers: {
-            'apikey': process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || '',
-            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY}`
+            'apikey': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvcmNwY2Jsdmp2bXdtb3J4Zm9sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzMzcyOTcsImV4cCI6MjA2ODkxMzI5N30.YKU93ukOCEQa6oioYliUlLD3FiMrl2yoOnSSYJslYME' || '',
+            'Authorization': `Bearer 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InFvcmNwY2Jsdmp2bXdtb3J4Zm9sIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTMzMzcyOTcsImV4cCI6MjA2ODkxMzI5N30.YKU93ukOCEQa6oioYliUlLD3FiMrl2yoOnSSYJslYME`
           }
         }
       );
