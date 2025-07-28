@@ -2,11 +2,8 @@
 'use client';
 import { useState, useEffect, useCallback } from 'react';
 import dynamic from 'next/dynamic';
+import FeedSection   from './FeedSection';
 
-const FeedSection = dynamic(() => import('@/components/FeedSection.client'), {
-  ssr: false,
-  loading: () => <p className="text-white text-center p-20">Loading…</p>,
-});
 
 export default function Page() {
   const [feed, setFeed] = useState<any[]>([]);
